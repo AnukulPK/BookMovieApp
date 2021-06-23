@@ -76,7 +76,11 @@ const Header = () => {
         <TabPanel value={value} index={0}>
           <TextField label="Email" required />
           <TextField label="Password" required type="password" />
-          <Button onClick={closeLoginHandler} color="primary">
+          <Button
+            variant="contained"
+            onClick={closeLoginHandler}
+            color="primary"
+          >
             Close Modal
           </Button>
         </TabPanel>
@@ -86,7 +90,11 @@ const Header = () => {
           <TextField label="Email" required />
           <TextField label="Password" required type="password" />
           <TextField label="Contact No" required />
-          <Button onClick={closeLoginHandler} color="primary">
+          <Button
+            variant="contained"
+            onClick={closeLoginHandler}
+            color="primary"
+          >
             Close Modal
           </Button>
         </TabPanel>
