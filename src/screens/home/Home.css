@@ -1,0 +1,17 @@
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  overflow: hidden;
+}
+
+.gridList {
+  display: flex;
+  overflow: hidden;
+  flex-wrap: nowrap;
+  transform: translateZ(0);
+}
+
+.grid-tile {
+  height: 250px;
+}
