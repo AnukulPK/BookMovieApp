@@ -40,6 +40,7 @@ const Header = () => {
           </Button>
         </div>
       </div>
+
       <Modal
         isOpen={loginOpen}
         ariaHideApp={false}
