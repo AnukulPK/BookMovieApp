@@ -1,17 +1,11 @@
-.root {
+.second-section {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  overflow: hidden;
 }
 
-.gridList {
-  display: flex;
-  overflow: hidden;
-  flex-wrap: nowrap;
-  transform: translateZ(0);
+.released-movies {
+  width: 76%;
 }
 
-.grid-tile {
-  height: 250px;
+.released-movies:hover {
+  cursor: pointer;
 }
