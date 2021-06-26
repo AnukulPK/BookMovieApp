@@ -9,3 +9,8 @@
 .released-movies:hover {
   cursor: pointer;
 }
+
+.filter-form {
+  margin-left: 10px;
+  width: 24%;
+}

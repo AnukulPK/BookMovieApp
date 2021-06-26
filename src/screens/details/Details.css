@@ -18,5 +18,18 @@
 
 .main-content {
   display: flex;
-  gap: 20px;
+  gap: 50px;
+}
+
+.mid-container {
+  width: 60%;
+}
+
+.star-container {
+  display: flex;
+  gap: 10px;
+}
+
+.artist-heading {
+  margin: 10px 0px;
 }

@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/styles";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { Typography } from "@material-ui/core";
 import YouTube from "react-youtube";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
+import ListSubheader from "@material-ui/core/ListSubheader";
+import IconButton from "@material-ui/core/IconButton";
+import InfoIcon from "@material-ui/icons/Info";
 import "./Details.css";
 
 const Details = () => {
@@ -10,14 +18,40 @@ const Details = () => {
   let [movieData, setMovieData] = useState("");
   let [genres, setGenres] = useState([]);
   let [youtubeUrl, setYouttubeUrl] = useState("");
+  let [actors, setActors] = useState([]);
+  let [rating, setRating] = useState(false);
 
   useEffect(() => {
-    axios.get(`http://localhost:8085/api/v1/movies/${id}`).then((response) => {
-      setMovieData(response.data);
-      setGenres(response.data.genres);
-      setYouttubeUrl(response.data.trailer_url);
-    });
+    axios
+      .get(`http://localhost:8085/api/v1/movies/${id}`)
+      .then((response) => {
+        setMovieData(response.data);
+        setGenres(response.data.genres);
+        setYouttubeUrl(response.data.trailer_url);
+        setActors(response.data.artists);
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 404) {
+          console.clear();
+        }
+      });
   }, []);
+
+  const useStyles = makeStyles({
+    root: {
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "space-around",
+      overflow: "hidden",
+    },
+    gridList: {
+      width: 300,
+      height: 350,
+    },
+    icon: {
+      color: "rgba(255, 255, 255, 0.54)",
+    },
+  });
 
   var releaseDate = new Date(movieData.release_date).toDateString();
 
@@ -33,6 +67,8 @@ const Details = () => {
     },
   };
 
+  const classes = useStyles();
+
   return (
     <div className="details-content">
       <Typography style={{ margin: "10px" }}>
@@ -41,9 +77,11 @@ const Details = () => {
         </Link>
       </Typography>
       <div className="main-content">
-        <div>
+        {/* First Section */}
+        <div className="first-container">
           <img src={movieData.poster_url} alt={movieData.title} />
         </div>
+        {/* Second Section */}
         <div className="mid-container">
           <Typography variant="h2" component="h2">
             {movieData.title}
@@ -91,6 +129,34 @@ const Details = () => {
               }}
             />
             ;
+          </Typography>
+        </div>
+        {/* Third section */}
+        <div className="last-container">
+          <Typography variant="subtitle1" gutterBottom>
+            <b>Rate this movie:</b>
+            <div className="star-container">
+              <StarBorderIcon />
+              <StarBorderIcon />
+              <StarBorderIcon />
+              <StarBorderIcon />
+              <StarBorderIcon />
+            </div>
+            <div className="artist-heading">
+              <b>Artists: </b>
+            </div>
+            <div className={classes.root}>
+              <GridList cellHeight={180} className={classes.gridList}>
+                {actors.map((actor) => (
+                  <GridListTile key={actor.id}>
+                    <img src={actor.profile_url} alt={actor.first_name} />
+                    <GridListTileBar
+                      title={actor.first_name + " " + actor.last_name}
+                    />
+                  </GridListTile>
+                ))}
+              </GridList>
+            </div>
           </Typography>
         </div>
       </div>
