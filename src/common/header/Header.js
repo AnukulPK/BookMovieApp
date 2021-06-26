@@ -75,28 +75,48 @@ const Header = () => {
           <Tab label="Register" />
         </Tabs>
         <TabPanel value={value} index={0}>
-          <TextField label="Email" required />
-          <TextField label="Password" required type="password" />
+          <TextField label="Username" required style={{ margin: "5px 0px" }} />
+          <TextField
+            label="Password"
+            required
+            type="password"
+            style={{ margin: "5px 0px" }}
+          />
           <Button
             variant="contained"
             onClick={closeLoginHandler}
             color="primary"
+            style={{ margin: "20px 20px" }}
           >
-            Close Modal
+            Login
           </Button>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <TextField label="First Name" required />
-          <TextField label="Last Name" />
-          <TextField label="Email" required />
-          <TextField label="Password" required type="password" />
-          <TextField label="Contact No" required />
+          <TextField
+            label="First Name"
+            required
+            style={{ margin: "5px 0px" }}
+          />
+          <TextField label="Last Name" style={{ margin: "5px 0px" }} />
+          <TextField label="Email" required style={{ margin: "5px 0px" }} />
+          <TextField
+            label="Password"
+            required
+            type="password"
+            style={{ margin: "5px 0px" }}
+          />
+          <TextField
+            label="Contact No"
+            required
+            style={{ margin: "5px 0px" }}
+          />
           <Button
             variant="contained"
             onClick={closeLoginHandler}
             color="primary"
+            style={{ margin: "20px 20px" }}
           >
-            Close Modal
+            Register
           </Button>
         </TabPanel>
       </Modal>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
@@ -13,8 +14,8 @@ const useStyles = makeStyles({
     overflow: "hidden",
   },
   gridList: {
-    width: 500,
-    height: 450,
+    width: 1000,
+    height: 1050,
   },
   icon: {
     color: "rgba(255, 255, 255, 0.54)",
@@ -32,7 +33,17 @@ export default function ReleasedMovies({ movieData }) {
 
           return (
             <GridListTile key={tile.id}>
-              <img src={tile.poster_url} alt={tile.title} />
+              <Link to="/movie-details">
+                <img
+                  src={tile.poster_url}
+                  alt={tile.title}
+                  style={{
+                    width: "100%",
+                    alignItems: "center",
+                    margin: "0px",
+                  }}
+                />
+              </Link>
               <GridListTileBar
                 title={tile.title}
                 subtitle={<span>Release Date: {expectedDate}</span>}

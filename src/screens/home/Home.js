@@ -21,6 +21,7 @@ const useStyles = makeStyles({
     flexWrap: "wrap",
     justifyContent: "space-around",
     overflow: "hidden",
+    marginBottom: "15px",
   },
   gridList: {
     flexWrap: "nowrap",
