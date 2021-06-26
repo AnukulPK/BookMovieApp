@@ -5,6 +5,13 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
+import {
+  Card,
+  CardContent,
+  FormControl,
+  TextField,
+  InputLabel,
+} from "@material-ui/core";
 import ReleasedMovies from "./ReleasedMovies";
 import "./Home.css";
 
@@ -17,7 +24,6 @@ const useStyles = makeStyles({
   },
   gridList: {
     flexWrap: "nowrap",
-    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: "translateZ(0)",
   },
 
@@ -61,7 +67,18 @@ const Home = () => {
         <div className="released-movies">
           <ReleasedMovies movieData={data} />
         </div>
-        <div className="filter-form"></div>
+        <div className="filter-form">
+          <Card>
+            <CardContent>
+              <InputLabel style={{ color: "#4791db" }}>
+                FIND MOVIES BY:
+              </InputLabel>
+              <FormControl>
+                <TextField id="standard-basic" label="Movie Name" />
+              </FormControl>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </Fragment>
   );

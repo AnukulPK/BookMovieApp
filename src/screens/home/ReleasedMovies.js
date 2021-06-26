@@ -28,12 +28,6 @@ export default function ReleasedMovies({ movieData }) {
     <div className={classes.root}>
       <GridList cellHeight={350} cols={3}>
         {movieData.map((tile) => {
-          var options = {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          };
           var expectedDate = new Date(tile.release_date).toDateString();
 
           return (
