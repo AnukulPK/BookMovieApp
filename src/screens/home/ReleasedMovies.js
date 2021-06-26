@@ -27,13 +27,13 @@ export default function ReleasedMovies({ movieData }) {
 
   return (
     <div className={classes.root}>
-      <GridList cellHeight={350} cols={3}>
+      <GridList cellHeight={350} cols={4}>
         {movieData.map((tile) => {
           var expectedDate = new Date(tile.release_date).toDateString();
 
           return (
             <GridListTile key={tile.id}>
-              <Link to="/movie-details">
+              <Link to={"/movie-details/" + tile.id}>
                 <img
                   src={tile.poster_url}
                   alt={tile.title}
