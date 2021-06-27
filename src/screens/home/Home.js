@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import axios from "axios";
+import Header from "../../common/header/Header";
 import Heading from "../../common/heading/Heading";
 import { makeStyles } from "@material-ui/styles";
 import GridList from "@material-ui/core/GridList";
@@ -111,6 +112,7 @@ const Home = () => {
 
   return (
     <Fragment>
+      <Header bookShow={false} />
       <Heading />
       <div className={classes.root}>
         <GridList className={classes.gridList} cols={6} cellHeight={250}>

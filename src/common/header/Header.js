@@ -6,7 +6,7 @@ import Modal from "react-modal";
 import TabPanel from "../tabPanel/TabPanel";
 import "./Header.css";
 
-const Header = () => {
+const Header = ({ bookShow, bookShowId }) => {
   const [loginOpen, setLoginOpen] = useState(false);
   const [value, setValue] = useState(0);
 
@@ -32,9 +32,17 @@ const Header = () => {
           <Button variant="contained" name="Login" onClick={loginHandler}>
             Login
           </Button>
-          <Button variant="contained" name="Book Show" color="primary">
-            Book Show
-          </Button>
+          {bookShow ? (
+            <Link
+              to={"/book-show/" + bookShowId}
+              style={{ textDecoration: "none" }}
+            >
+              <Button variant="contained" name="Book Show" color="primary">
+                Book Show
+              </Button>
+            </Link>
+          ) : null}
+
           <Button variant="contained" name="Logout">
             Logout
           </Button>

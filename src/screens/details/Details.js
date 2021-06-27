@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
+import Header from "../../common/header/Header";
 import { makeStyles } from "@material-ui/styles";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import { Typography } from "@material-ui/core";
+import { Typography, Button } from "@material-ui/core";
 import YouTube from "react-youtube";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
-import ListSubheader from "@material-ui/core/ListSubheader";
-import IconButton from "@material-ui/core/IconButton";
-import InfoIcon from "@material-ui/icons/Info";
 import "./Details.css";
+import { Fragment } from "react";
 
 const Details = () => {
   let { id } = useParams();
@@ -70,97 +69,109 @@ const Details = () => {
   const classes = useStyles();
 
   return (
-    <div className="details-content">
-      <Typography style={{ margin: "10px" }}>
-        <Link to="/" className="back-link">
-          <span className="back-to-home">&#60; Back to Home</span>
-        </Link>
-      </Typography>
-      <div className="main-content">
-        {/* First Section */}
-        <div className="first-container">
-          <img src={movieData.poster_url} alt={movieData.title} />
-        </div>
-        {/* Second Section */}
-        <div className="mid-container">
-          <Typography variant="h2" component="h2">
-            {movieData.title}
-          </Typography>
-          <Typography variant="subtitle1" gutterBottom>
-            <b>Genre: </b>
-            {genres.map((genre) => `${genre}, `)}
-          </Typography>
-          <Typography variant="subtitle1" gutterBottom>
-            <b>Duration: </b>
-            {movieData.duration}
-          </Typography>
-          <Typography variant="subtitle1" gutterBottom>
-            <b>Release Date: </b>
-            {releaseDate}
-          </Typography>
-          <Typography variant="subtitle1" gutterBottom>
-            <b>Rating: </b>
-            {movieData.rating}
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            gutterBottom
-            style={{ marginTop: "16px" }}
-          >
-            <b>
-              Plot:{" "}
-              <a href={movieData.wiki_url} target="_blank">
-                (Wiki Link)
-              </a>
-            </b>
-            {" " + movieData.storyline}
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            gutterBottom
-            style={{ marginTop: "16px" }}
-          >
-            <b>Trailer:</b>
-            <YouTube
-              videoId={youtubeId}
-              opts={opts}
-              onReady={(event) => {
-                event.target.pauseVideo();
-              }}
-            />
-            ;
-          </Typography>
-        </div>
-        {/* Third section */}
-        <div className="last-container">
-          <Typography variant="subtitle1" gutterBottom>
-            <b>Rate this movie:</b>
-            <div className="star-container">
-              <StarBorderIcon />
-              <StarBorderIcon />
-              <StarBorderIcon />
-              <StarBorderIcon />
-              <StarBorderIcon />
-            </div>
-            <div className="artist-heading">
-              <b>Artists: </b>
-            </div>
-            <div className={classes.root}>
-              <GridList cellHeight={180} className={classes.gridList}>
-                {actors.map((actor) => (
-                  <GridListTile key={actor.id}>
-                    <img src={actor.profile_url} alt={actor.first_name} />
-                    <GridListTileBar
-                      title={actor.first_name + " " + actor.last_name}
-                    />
-                  </GridListTile>
-                ))}
-              </GridList>
-            </div>
-          </Typography>
+    <Fragment>
+      <Header bookShow={true} bookShowId={id} />
+      <div className="details-content">
+        <Typography style={{ margin: "10px" }}>
+          <Link to="/" className="back-link">
+            <span className="back-to-home">&#60; Back to Home</span>
+          </Link>
+        </Typography>
+        <div className="main-content">
+          {/* First Section */}
+          <div className="first-container">
+            <img src={movieData.poster_url} alt={movieData.title} />
+          </div>
+          {/* Second Section */}
+          <div className="mid-container">
+            <Typography variant="h2" component="h2">
+              {movieData.title}
+            </Typography>
+            <Typography variant="subtitle1" gutterBottom>
+              <b>Genre: </b>
+              {genres.map((genre) => `${genre}, `)}
+            </Typography>
+            <Typography variant="subtitle1" gutterBottom>
+              <b>Duration: </b>
+              {movieData.duration}
+            </Typography>
+            <Typography variant="subtitle1" gutterBottom>
+              <b>Release Date: </b>
+              {releaseDate}
+            </Typography>
+            <Typography variant="subtitle1" gutterBottom>
+              <b>Rating: </b>
+              {movieData.rating}
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              gutterBottom
+              style={{ marginTop: "16px" }}
+            >
+              <b>
+                Plot:{" "}
+                <a href={movieData.wiki_url} target="_blank">
+                  (Wiki Link)
+                </a>
+              </b>
+              {" " + movieData.storyline}
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              gutterBottom
+              style={{ marginTop: "16px" }}
+            >
+              <b>Trailer:</b>
+              <YouTube
+                videoId={youtubeId}
+                opts={opts}
+                onReady={(event) => {
+                  event.target.pauseVideo();
+                }}
+              />
+              ;
+              <Link to="/" style={{ textDecoration: "none" }}>
+                <Button variant="contained" name="Book Show" color="primary">
+                  Book Show
+                </Button>
+              </Link>
+            </Typography>
+          </div>
+          {/* Third section */}
+          <div className="last-container">
+            <Typography variant="subtitle1" gutterBottom>
+              <b>Rate this movie:</b>
+              <div className="star-container">
+                <StarBorderIcon />
+                <StarBorderIcon />
+                <StarBorderIcon />
+                <StarBorderIcon />
+                <StarBorderIcon />
+              </div>
+              <div className="artist-heading">
+                <b>Artists: </b>
+              </div>
+              <div className={classes.root}>
+                <GridList cellHeight={180} className={classes.gridList}>
+                  {actors ? (
+                    actors.map((actor) => (
+                      <GridListTile key={actor.id}>
+                        <img src={actor.profile_url} alt={actor.first_name} />
+                        <GridListTileBar
+                          title={actor.first_name + " " + actor.last_name}
+                        />
+                      </GridListTile>
+                    ))
+                  ) : (
+                    <h6>No actor data available</h6>
+                  )}
+                </GridList>
+              </div>
+            </Typography>
+          </div>
         </div>
       </div>
-    </div>
+    </Fragment>
   );
 };
 
