@@ -1,5 +1,12 @@
 import React, { Fragment, useState } from "react";
-import { Button, Tab, Tabs, TextField } from "@material-ui/core";
+import {
+  Button,
+  Tab,
+  Tabs,
+  TextField,
+  Typography,
+  FormControl,
+} from "@material-ui/core";
 import Logo from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
@@ -9,17 +16,25 @@ import "./Header.css";
 const Header = ({ bookShow, bookShowId }) => {
   const [loginOpen, setLoginOpen] = useState(false);
   const [value, setValue] = useState(0);
+  const [login, setLogin] = useState(true);
+  const [success, setSuccess] = useState(false);
 
   const loginHandler = () => {
     setLoginOpen(true);
   };
 
-  const closeLoginHandler = () => {
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  const loginFormHandler = () => {
+    setLogin(false);
     setLoginOpen(false);
   };
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const registerFormHandler = () => {
+    setLogin(false);
+    setSuccess(true);
   };
 
   return (
@@ -29,9 +44,22 @@ const Header = ({ bookShow, bookShowId }) => {
           <img className="logo" src={Logo} alt="logo" />
         </Link>
         <div className="button-group">
-          <Button variant="contained" name="Login" onClick={loginHandler}>
-            Login
-          </Button>
+          {login ? (
+            <Button variant="contained" name="Login" onClick={loginHandler}>
+              Login
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              name="Logout"
+              onClick={() => {
+                setLogin(true);
+              }}
+            >
+              Logout
+            </Button>
+          )}
+
           {bookShow ? (
             <Link
               to={"/book-show/" + bookShowId}
@@ -42,10 +70,6 @@ const Header = ({ bookShow, bookShowId }) => {
               </Button>
             </Link>
           ) : null}
-
-          <Button variant="contained" name="Logout">
-            Logout
-          </Button>
         </div>
       </div>
 
@@ -92,7 +116,7 @@ const Header = ({ bookShow, bookShowId }) => {
           />
           <Button
             variant="contained"
-            onClick={closeLoginHandler}
+            onClick={loginFormHandler}
             color="primary"
             style={{ margin: "20px 20px" }}
           >
@@ -118,9 +142,14 @@ const Header = ({ bookShow, bookShowId }) => {
             required
             style={{ margin: "5px 0px" }}
           />
+          {success ? (
+            <Typography variant="subtitle1" gutterBottom>
+              Registration Successful. Please login!
+            </Typography>
+          ) : null}
           <Button
             variant="contained"
-            onClick={closeLoginHandler}
+            onClick={registerFormHandler}
             color="primary"
             style={{ margin: "20px 20px" }}
           >

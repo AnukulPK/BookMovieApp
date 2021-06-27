@@ -129,12 +129,6 @@ const Details = () => {
                   event.target.pauseVideo();
                 }}
               />
-              ;
-              <Link to="/" style={{ textDecoration: "none" }}>
-                <Button variant="contained" name="Book Show" color="primary">
-                  Book Show
-                </Button>
-              </Link>
             </Typography>
           </div>
           {/* Third section */}
